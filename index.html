@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Web</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<div class="phone">
+
+    <!-- Pantalla 1 -->
+    <div class="screen active" id="home">
+        <h1>Inicio</h1>
+        <p>Esto es una web tipo móvil</p>
+        <button onclick="goTo('page1')">Ir a otra sección</button>
+    </div>
+
+    <!-- Pantalla 2 -->
+    <div class="screen" id="page1">
+        <h1>Página 1</h1>
+        <p>Contenido de la primera pantalla</p>
+
+        <button onclick="goTo('home')">Volver</button>
+        <button onclick="goTo('page2')">Abrir símbolo</button>
+    </div>
+
+    <!-- Pantalla 3 -->
+    <div class="screen" id="page2">
+        <h1>Página 2</h1>
+        <p>Esto simula otra “pestaña” dentro de la web</p>
+
+        <button onclick="goTo('page1')">Volver</button>
+    </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
