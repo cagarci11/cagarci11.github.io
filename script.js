@@ -15,18 +15,20 @@ function openApp(nombreApp) {
     const ventana = document.getElementById('custom-window');
     const titulo = document.getElementById('window-title');
     const contenido = document.getElementById('app-content-area');
-
-    const musica = document.getElementById('bg-music');
+    const musicaSJ = document.getElementById('bg-music');
     const musicaSafari = document.getElementById('safari-music');
+
+    // Función interna para parar todo antes de abrir una app nueva
+    function pararTodo() {
+        musicaSJ.pause();
+        musicaSafari.pause();
+    }
 
     titulo.innerText = nombreApp;
     ventana.style.display = 'flex';
+    pararTodo(); // Paramos cualquier música que estuviera sonando
 
-    // 1. Caso Galería
     if (nombreApp === 'Galería') {
-        musica.pause();
-        musicaSafari.pause();
-
         contenido.innerHTML = `
             <div class="gallery-grid">
                 <img src="oroRosa.jpg" class="gallery-item" onclick="playVideo('ValgaPena.mp4')">
@@ -36,63 +38,51 @@ function openApp(nombreApp) {
             </div>
         `;
     } 
-    // 2. Caso San Jorge
-    else if (nombreApp === 'San Jorge') {
-        musicaSafari.pause();
-        contenido.innerHTML = `
-            <div class="sj-container">
-                <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
-                <p class="sj-subtext">espero q no expire nunca</p>
-                <p class="sj-subtext"></p>
-                <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
-                <p class="sj-text">Pero tranqui que no te quedas sin tu rosa</p>
-                <img src="rosas.webp" class="sj-foto">
-            </div>
-        `;
-        musica.play().catch(e => console.log("Audio bloqueado"));
-    } 
-    // Caso navegador
     else if (nombreApp === 'Safari' || nombreApp === 'Navegador') {
-
         contenido.innerHTML = `
             <div class="safari-container">
                 <div class="safari-address-bar">
-                    <div class="url-text">amorcegocupido.com</div>
+                    <div class="url-text">conamør.com</div>
                 </div>
                 <div class="safari-offline-content">
-                    <img src="cora.png" class="broken-heart-img">
+                    <div class="broken-heart-pixel" style="font-size: 50px; margin-bottom: 20px;">💔</div>
                     <h2>Sin conexión a Internet</h2>
                     <p>Comprueba tu conexión Wi-Fi o de datos móviles, o recibe una notificación cuando vuelva la conexión</p>
                 </div>
             </div>
         `;
-
         musicaSafari.play().catch(e => console.log("Audio bloqueado"));
     }
-    // 3. Cualquier otra App
+    else if (nombreApp === 'San Jorge') {
+        contenido.innerHTML = `
+            <div class="sj-container">
+                <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
+                <img src="rosas.webp" class="sj-foto">
+                <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
+            </div>
+        `;
+        musicaSJ.play().catch(e => console.log("Audio bloqueado"));
+    } 
     else {
-        musica.pause();
         contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
     }
 }
 
 function closeCustomApp() {
     const ventana = document.getElementById('custom-window');
-    const musica = document.getElementById('bg-music');
+    const musicaSJ = document.getElementById('bg-music');
     const musicaSafari = document.getElementById('safari-music');
 
     if (ventana) {
-        ventana.classList.remove('active');
-        setTimeout(() => {
-            ventana.style.display = 'none';
-            
-            // Paramos ambos audios
-            musicaGeneral.pause();
-            musicaGeneral.currentTime = 0;
-            
-            musicaSafari.pause();
-            musicaSafari.currentTime = 0;
-        }, 300);
+        ventana.style.display = 'none';
+        
+        // Pausar y resetear música de San Jorge
+        musicaSJ.pause();
+        musicaSJ.currentTime = 0;
+        
+        // Pausar y resetear música de Safari
+        musicaSafari.pause();
+        musicaSafari.currentTime = 0;
     }
 }
 

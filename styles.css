@@ -337,14 +337,15 @@ body {
 }
 
 .broken-heart-pixel {
-    font-size: 50px; /* Tamaño del icono */
-    margin-bottom: 20px;
+    font-size: 60px; 
+    display: block;
+    margin-bottom: 15px;
 }
 
 .safari-offline-content h2 {
     font-size: 20px;
-    margin-bottom: 15px;
-    font-weight: 700;
+    color: #2c2c2e;
+    margin-bottom: 10px;
 }
 
 .safari-offline-content p {
