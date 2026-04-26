@@ -301,3 +301,54 @@ body {
     z-index: 100;
     cursor: pointer;
 }
+
+/* Estilos para el Navegador Safari */
+.safari-container {
+    background-color: #ebebeb; /* Gris claro de fondo */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.safari-address-bar {
+    background-color: white;
+    margin: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.url-text {
+    color: #333;
+    font-size: 14px;
+    font-family: -apple-system, sans-serif;
+}
+
+.safari-offline-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    color: #2c2c2e;
+}
+
+.broken-heart-pixel {
+    font-size: 50px; /* Tamaño del icono */
+    margin-bottom: 20px;
+}
+
+.safari-offline-content h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+    font-weight: 700;
+}
+
+.safari-offline-content p {
+    font-size: 15px;
+    color: #636366;
+    line-height: 1.4;
+}

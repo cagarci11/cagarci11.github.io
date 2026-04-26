@@ -15,7 +15,9 @@ function openApp(nombreApp) {
     const ventana = document.getElementById('custom-window');
     const titulo = document.getElementById('window-title');
     const contenido = document.getElementById('app-content-area');
+
     const musica = document.getElementById('bg-music');
+    const musicaSafari = document.getElementById('safari-music');
 
     titulo.innerText = nombreApp;
     ventana.style.display = 'flex';
@@ -23,6 +25,8 @@ function openApp(nombreApp) {
     // 1. Caso Galería
     if (nombreApp === 'Galería') {
         musica.pause();
+        musicaSafari.pause();
+
         contenido.innerHTML = `
             <div class="gallery-grid">
                 <img src="oroRosa.jpg" class="gallery-item" onclick="playVideo('ValgaPena.mp4')">
@@ -34,10 +38,12 @@ function openApp(nombreApp) {
     } 
     // 2. Caso San Jorge
     else if (nombreApp === 'San Jorge') {
+        musicaSafari.pause();
         contenido.innerHTML = `
             <div class="sj-container">
                 <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
                 <p class="sj-subtext">espero q no expire nunca</p>
+                <p class="sj-subtext"></p>
                 <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
                 <p class="sj-text">Pero tranqui que no te quedas sin tu rosa</p>
                 <img src="rosas.webp" class="sj-foto">
@@ -45,6 +51,24 @@ function openApp(nombreApp) {
         `;
         musica.play().catch(e => console.log("Audio bloqueado"));
     } 
+    // Caso navegador
+    else if (nombreApp === 'Safari' || nombreApp === 'Navegador') {
+
+        contenido.innerHTML = `
+            <div class="safari-container">
+                <div class="safari-address-bar">
+                    <div class="url-text">amorcegocupido.com</div>
+                </div>
+                <div class="safari-offline-content">
+                    <img src="cora.png" class="broken-heart-img">
+                    <h2>Sin conexión a Internet</h2>
+                    <p>Comprueba tu conexión Wi-Fi o de datos móviles, o recibe una notificación cuando vuelva la conexión</p>
+                </div>
+            </div>
+        `;
+
+        musicaSafari.play().catch(e => console.log("Audio bloqueado"));
+    }
     // 3. Cualquier otra App
     else {
         musica.pause();
@@ -55,10 +79,20 @@ function openApp(nombreApp) {
 function closeCustomApp() {
     const ventana = document.getElementById('custom-window');
     const musica = document.getElementById('bg-music');
+    const musicaSafari = document.getElementById('safari-music');
+
     if (ventana) {
-        ventana.style.display = 'none';
-        musica.pause();
-        musica.currentTime = 0; // Reinicia la canción
+        ventana.classList.remove('active');
+        setTimeout(() => {
+            ventana.style.display = 'none';
+            
+            // Paramos ambos audios
+            musicaGeneral.pause();
+            musicaGeneral.currentTime = 0;
+            
+            musicaSafari.pause();
+            musicaSafari.currentTime = 0;
+        }, 300);
     }
 }
 
