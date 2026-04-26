@@ -58,9 +58,14 @@ function openApp(nombreApp) {
     else if (nombreApp === 'San Jorge') {
         contenido.innerHTML = `
             <div class="sj-container">
-                <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
-                <img src="rosas.webp" class="sj-foto">
-                <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
+
+            <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
+            <p class="sj-subtext">espero q no expire nunca</p>
+            <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
+            <p class="sj-text">Pero tranqui que no te quedas sin tu rosa</p>
+
+            <img src="rosas.webp" class="sj-foto">
+
             </div>
         `;
         // Reproducir solo SJ
