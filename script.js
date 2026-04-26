@@ -12,24 +12,43 @@ updateClock();
 
 // Función para simular abrir Apps
 function openApp(nombreApp) {
-    console.log("Intentando abrir app: " + nombreApp);
-
     const ventana = document.getElementById('custom-window');
     const titulo = document.getElementById('window-title');
-    
-    if (ventana && titulo) {
-        // AQUÍ ESTABA EL FALLO: Ahora usamos nombreApp
-        titulo.innerText = nombreApp; 
-        ventana.style.display = 'flex'; 
+    const contenido = document.getElementById('app-content-area');
+    const musica = document.getElementById('bg-music');
+
+    titulo.innerText = nombreApp;
+    ventana.style.display = 'flex';
+
+    // Lógica para el contenido de San Jorge
+    if (nombreApp === 'San Jorge') {
+        contenido.innerHTML = `
+            <div class="sj-container">
+                <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
+                <p class="sj-text">espero q no expire nunca</p>
+                <p class="sj-subtext">Supongo que el día de San Jorge es subjetivo, no tiene porque ser el 23 de abril...</p>
+                <p class="sj-subtext">Pero tranqui que no te quedas sin tu rosa</p>
+                
+                <img src="rosas.webp" class="sj-foto">
+
+            </div>
+        `;
+        // Intentar reproducir música
+        musica.play().catch(e => console.log("El navegador bloqueó el auto-play, haz clic en la ventana"));
     } else {
-        console.error("No se encontró la ventana o el título en el HTML");
+        // Para las otras apps, dejamos el contenido vacío o genérico
+        contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
+        musica.pause(); // Pausar música si abres otra cosa
     }
 }
 
 function closeCustomApp() {
     const ventana = document.getElementById('custom-window');
+    const musica = document.getElementById('bg-music');
     if (ventana) {
         ventana.style.display = 'none';
+        musica.pause();
+        musica.currentTime = 0; // Reinicia la canción
     }
 }
 
