@@ -15,18 +15,19 @@ function openApp(nombreApp) {
     const ventana = document.getElementById('custom-window');
     const titulo = document.getElementById('window-title');
     const contenido = document.getElementById('app-content-area');
+    
+    // Referencias directas
     const musicaSJ = document.getElementById('bg-music');
     const musicaSafari = document.getElementById('safari-music');
 
-    // Función interna para parar todo antes de abrir una app nueva
-    function pararTodo() {
-        musicaSJ.pause();
-        musicaSafari.pause();
-    }
+    // 1. Reset total de audios antes de hacer NADA
+    musicaSJ.pause(); 
+    musicaSJ.currentTime = 0;
+    musicaSafari.pause(); 
+    musicaSafari.currentTime = 0;
 
     titulo.innerText = nombreApp;
     ventana.style.display = 'flex';
-    pararTodo(); // Paramos cualquier música que estuviera sonando
 
     if (nombreApp === 'Galería') {
         contenido.innerHTML = `
@@ -45,13 +46,14 @@ function openApp(nombreApp) {
                     <div class="url-text">conamør.com</div>
                 </div>
                 <div class="safari-offline-content">
-                    <div class="broken-heart-pixel" style="font-size: 50px; margin-bottom: 20px;">💔</div>
+                    <div class="broken-heart-pixel">💔</div>
                     <h2>Sin conexión a Internet</h2>
                     <p>Comprueba tu conexión Wi-Fi o de datos móviles, o recibe una notificación cuando vuelva la conexión</p>
                 </div>
             </div>
         `;
-        musicaSafari.play().catch(e => console.log("Audio bloqueado"));
+        // Reproducir solo Safari
+        musicaSafari.play().catch(e => console.log("Error audio Safari"));
     }
     else if (nombreApp === 'San Jorge') {
         contenido.innerHTML = `
@@ -61,13 +63,15 @@ function openApp(nombreApp) {
                 <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
             </div>
         `;
-        musicaSJ.play().catch(e => console.log("Audio bloqueado"));
+        // Reproducir solo SJ
+        musicaSJ.play().catch(e => console.log("Error audio SJ"));
     } 
     else {
         contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
     }
 }
 
+// ESTA FUNCIÓN ES LA QUE CIERRA TODO
 function closeCustomApp() {
     const ventana = document.getElementById('custom-window');
     const musicaSJ = document.getElementById('bg-music');
@@ -76,13 +80,16 @@ function closeCustomApp() {
     if (ventana) {
         ventana.style.display = 'none';
         
-        // Pausar y resetear música de San Jorge
+        // Pausa forzada
         musicaSJ.pause();
-        musicaSJ.currentTime = 0;
-        
-        // Pausar y resetear música de Safari
         musicaSafari.pause();
+        
+        // Reset del tiempo
+        musicaSJ.currentTime = 0;
         musicaSafari.currentTime = 0;
+
+        // Limpiar el contenido para que si hay un video también se pare
+        document.getElementById('app-content-area').innerHTML = "";
     }
 }
 
