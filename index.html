@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Cupido OS</title>
+    <title>25</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -33,6 +33,11 @@
             <div class="icon-img notas"></div>
             <span>Notas</span>
         </div>
+
+        <div class="app-icon" onclick="openCustomApp('San Jorge')">
+            <div class="icon-img" style="background-image: url('23A.jpg'); background-color: white; background-size: cover;"></div>
+            <span>SJ</span>
+        </div>
     </main>
 
     <div class="dock-container">
@@ -58,6 +63,19 @@
                 <div class="dot"></div>
             </div>
         </nav>
+    </div>
+
+    <div id="custom-window" class="window-overlay" style="display: none;">
+        <div class="window-container">
+            <div class="window-header">
+                <div class="header-controls">
+                    <span class="dot-close" onclick="closeCustomApp()"></span>
+                </div>
+                <span class="window-title">Nueva Ventana</span>
+            </div>
+            <div class="window-content">
+                </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

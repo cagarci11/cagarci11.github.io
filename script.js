@@ -48,3 +48,11 @@ function syncBattery() {
 
 // Ejecutamos la función
 syncBattery();
+
+function openCustomApp() {
+    document.getElementById('custom-window').style.display = 'flex';
+}
+
+function closeCustomApp() {
+    document.getElementById('custom-window').style.display = 'none';
+}

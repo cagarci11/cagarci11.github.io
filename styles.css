@@ -146,3 +146,67 @@ body {
         height: 45px;
     }
 }
+
+/* Estilo de la ventana que se abre */
+.window-overlay {
+    display: none; /* Escondida por defecto */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.3); /* Fondo oscurecido suave */
+    backdrop-filter: blur(5px);
+    z-index: 5000;
+    justify-content: center;
+    align-items: center;
+}
+
+.window-container {
+    width: 90%;
+    max-width: 600px;
+    height: 70vh;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+}
+
+.window-header {
+    background: #f6f6f6;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 15px;
+    border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.header-controls {
+    display: flex;
+    gap: 8px;
+}
+
+.dot-close {
+    width: 12px;
+    height: 12px;
+    background: #ff5f56; /* Botón rojo de cerrar */
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.window-title {
+    flex: 1;
+    text-align: center;
+    color: #333;
+    font-size: 14px;
+    font-weight: 500;
+    margin-right: 20px; /* Para centrar respecto al botón */
+}
+
+.window-content {
+    flex: 1;
+    background: white;
+}
