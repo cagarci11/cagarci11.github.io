@@ -10,23 +10,23 @@ body {
     height: 100vh;
     width: 100vw;
     
-    
-    background-image: url('https://recycledj.pavloh.com/merch'); 
+    /* CAMBIO AQUÍ: Usa el nombre de tu archivo subido a GitHub */
+    background-image: url('fondo.png'); 
     
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
-    background-attachment: fixed; /* Esto hace que el fondo no se mueva al hacer scroll */
-    
+    background-attachment: fixed;
     overflow: hidden;
     color: white;
 }
 
-/* --- BARRA SUPERIOR (Se mantiene igual en ambos) --- */
+/* --- BARRA SUPERIOR --- */
 .status-bar {
     height: 30px;
     background: rgba(120, 120, 120, 0.7);
     backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,18 +35,19 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 100;
+    z-index: 2000; /* Aumentamos el z-index para que siempre esté arriba */
 }
 
-/* --- DISEÑO PARA ORDENADOR (Tu diseño actual) --- */
+/* --- ESCRITORIO --- */
 .desktop {
     padding: 60px 30px;
     display: grid;
-    /* En PC: iconos alineados a la izquierda en columnas fijas */
     grid-template-columns: repeat(auto-fill, 110px);
     grid-auto-rows: 120px;
     gap: 20px;
-    height: 100%;
+    /* Ajustamos el alto para que no tape el Dock */
+    height: calc(100vh - 100px); 
+    overflow-y: auto;
 }
 
 .app-icon {
@@ -76,60 +77,34 @@ body {
     text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
 }
 
-/* Imágenes de los iconos */
+/* Iconos */
 .galeria { background-image: url('https://cdn-icons-png.flaticon.com/512/1375/1375106.png'); }
 .amor { background-image: url('https://cdn-icons-png.flaticon.com/512/716/716784.png'); background-color: #90caf9; }
 .papelera { background-image: url('https://cdn-icons-png.flaticon.com/512/2891/2891491.png'); }
-.navegador { background-image: url('https://cdn-icons-png.flaticon.com/512/888/888846.png'); }
 .notas { background-image: url('https://cdn-icons-png.flaticon.com/512/1024/1024824.png'); }
 
-/* --- AJUSTE EXCLUSIVO PARA MÓVIL (Lo que me pediste) --- */
-@media (max-width: 600px) {
-    .desktop {
-        /* En móvil: forzamos 3 columnas centradas como en tu imagen */
-        grid-template-columns: repeat(3, 1fr);
-        padding: 70px 10px;
-        gap: 15px;
-        justify-items: center;
-    }
-
-    .app-icon {
-        width: 100%; /* Que ocupe su celda del grid */
-    }
-
-    .icon-img {
-        width: 60px; /* Un pelín más pequeños para que no choquen */
-        height: 60px;
-    }
-
-    .app-icon span {
-        font-size: 11px; /* Texto más compacto para móvil */
-        white-space: nowrap;
-    }
-}
-
-/* --- EL DOCK FLOTANTE --- */
+/* --- DOCK FLOTANTE (Global) --- */
 .dock-container {
     position: fixed;
     bottom: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
-    z-index: 1000;
+    z-index: 3000; /* Capa más alta de todas */
     padding: 0 10px;
 }
 
 .dock {
-    background: rgba(255, 255, 255, 0.25); /* Fondo blanquecino traslúcido */
-    backdrop-filter: blur(15px); /* Efecto cristal */
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(15px);
     -webkit-backdrop-filter: blur(15px);
-    padding: 8px 15px;
-    border-radius: 22px;
+    padding: 10px 20px;
+    border-radius: 24px;
     display: flex;
-    align-items: flex-end;
-    gap: 12px;
+    align-items: center;
+    gap: 15px;
     border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
 .dock-item {
@@ -137,44 +112,37 @@ body {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.dock-item:hover {
-    transform: scale(1.2) translateY(-10px); /* El icono crece y sube al pasar el ratón */
+    transition: transform 0.2s ease;
 }
 
 .dock-item img {
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
 }
 
-/* El puntito blanco debajo del icono */
 .dot {
     width: 4px;
     height: 4px;
     background: white;
     border-radius: 50%;
     margin-top: 4px;
-    opacity: 0.8;
 }
 
-/* AJUSTE PARA MÓVIL (Para que el dock no sea gigante) */
+/* --- RESPONSIVE MÓVIL --- */
 @media (max-width: 600px) {
-    .dock {
-        padding: 6px 10px;
-        gap: 8px;
-        border-radius: 18px;
+    .desktop {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 70px 10px;
+        justify-items: center;
     }
-    
+
+    .app-icon { width: 100%; }
+    .icon-img { width: 60px; height: 60px; }
+    .app-icon span { font-size: 11px; }
+
     .dock-item img {
-        width: 42px;
-        height: 42px;
-    }
-    
-    .dock-container {
-        bottom: 15px;
+        width: 45px;
+        height: 45px;
     }
 }
