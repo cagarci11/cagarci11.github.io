@@ -209,6 +209,7 @@ body {
 .window-content {
     flex: 1;
     background: white;
+    overflow-y: auto;  
 }
 
 .sj-foto {
