@@ -23,16 +23,16 @@ function openApp(nombreApp) {
     // Lógica para el contenido de San Jorge
     if (nombreApp === 'San Jorge') {
         contenido.innerHTML = `
-            <div class="sj-container">
-                <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
-                <p class="sj-text">espero q no expire nunca</p>
-                <p class="sj-subtext">Supongo que el día de San Jorge es subjetivo, no tiene porque ser el 23 de abril...</p>
-                <p class="sj-subtext">Pero tranqui que no te quedas sin tu rosa</p>
-                
-                <img src="rosas.webp" class="sj-foto">
+        <div class="sj-container">
+            <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
+            <p class="sj-text">espero q no expire nunca</p>
+            <p class="sj-subtext">Supongo que el día de San Jorge es subjetivo</p>
+            <p class="sj-subtext">Pero tranqui que no te quedas sin tu rosa</p>
 
-            </div>
-        `;
+            <img src="rosas.webp" class="sj-foto">
+
+        </div>
+    `;
         // Intentar reproducir música
         musica.play().catch(e => console.log("El navegador bloqueó el auto-play, haz clic en la ventana"));
     } else {
