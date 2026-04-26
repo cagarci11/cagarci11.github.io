@@ -20,39 +20,35 @@ function openApp(nombreApp) {
     titulo.innerText = nombreApp;
     ventana.style.display = 'flex';
 
-    // Lógica para el contenido de Galeria
+    // 1. Caso Galería
     if (nombreApp === 'Galería') {
-        // Aquí defines tus vídeos y sus miniaturas (puedes usar fotos para la miniatura)
+        musica.pause();
         contenido.innerHTML = `
             <div class="gallery-grid">
                 <img src="oroRosa.jpg" class="gallery-item" onclick="playVideo('ValgaPena.mp4')">
                 <img src="sadSummer.jpg" class="gallery-item" onclick="playVideo('40noches.mp4')">
                 <img src="casanova.jpg" class="gallery-item" onclick="playVideo('ganas.mp4')">
                 <img src="23A.jpg" class="gallery-item" onclick="playVideo('tanFrio.mp4')">
-                </div>
+            </div>
         `;
-        musica.pause();
-    }
-
-    // Lógica para el contenido de San Jorge
-    if (nombreApp === 'San Jorge') {
+    } 
+    // 2. Caso San Jorge
+    else if (nombreApp === 'San Jorge') {
         contenido.innerHTML = `
-        <div class="sj-container">
-            <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
-            <p class="sj-subtext">espero q no expire nunca</p>
-            <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
-            <p class="sj-text">Pero tranqui que no te quedas sin tu rosa</p>
-
-            <img src="rosas.webp" class="sj-foto">
-
-        </div>
-    `;
-        // Intentar reproducir música
-        musica.play().catch(e => console.log("El navegador bloqueó el auto-play, haz clic en la ventana"));
-    } else {
-        // Para las otras apps, dejamos el contenido vacío o genérico
+            <div class="sj-container">
+                <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
+                <p class="sj-subtext">espero q no expire nunca</p>
+                <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
+                <p class="sj-text">Pero tranqui que no te quedas sin tu rosa</p>
+                <img src="rosas.webp" class="sj-foto">
+            </div>
+        `;
+        musica.play().catch(e => console.log("Audio bloqueado"));
+    } 
+    // 3. Cualquier otra App
+    else {
+        musica.pause();
         contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
-        musica.pause(); // Pausar música si abres otra cosa
     }
 }
 

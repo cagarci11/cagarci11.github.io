@@ -244,9 +244,9 @@ body {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr); /* 3 columnas */
-    gap: 2px;
-    padding: 2px;
+    grid-template-columns: repeat(2, 1fr); /* 2 fotos por fila para que se vean grandes */
+    gap: 10px;
+    padding: 15px;
 }
 
 .gallery-item-container {
@@ -259,8 +259,11 @@ body {
 
 .gallery-item {
     width: 100%;
-    height: 100%;
+    aspect-ratio: 1 / 1; /* Esto las hace cuadradas */
     object-fit: cover;
+    border-radius: 12px; /* Bordes redondeados como en tu imagen */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
 /* El tiempito del video abajo a la derecha */
