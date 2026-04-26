@@ -1,9 +1,15 @@
-function goTo(page) {
+function goTo(pageId) {
+    // 1. Ocultar todas las pantallas
     const screens = document.querySelectorAll(".screen");
-
-    screens.forEach(s => {
-        s.classList.remove("active");
+    screens.forEach(screen => {
+        screen.classList.remove("active");
     });
 
-    document.getElementById(page).classList.add("active");
+    // 2. Mostrar la pantalla seleccionada
+    const targetScreen = document.getElementById(pageId);
+    if (targetScreen) {
+        targetScreen.classList.add("active");
+    } else {
+        console.error("La pantalla " + pageId + " no existe.");
+    }
 }
