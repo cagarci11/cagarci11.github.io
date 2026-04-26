@@ -9,7 +9,10 @@ body {
     font-family: -apple-system, system-ui, sans-serif;
     height: 100vh;
     width: 100vw;
+    
+    /* CAMBIO AQUÍ: Usa el nombre de tu archivo subido a GitHub */
     background-image: url('fondo.png'); 
+    
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -21,9 +24,9 @@ body {
 /* --- BARRA SUPERIOR --- */
 .status-bar {
     height: 30px;
-    background: rgba(120, 120, 120, 0.5);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
+    background: rgba(120, 120, 120, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -32,7 +35,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 2000;
+    z-index: 2000; /* Aumentamos el z-index para que siempre esté arriba */
 }
 
 /* --- ESCRITORIO --- */
@@ -127,15 +130,33 @@ body {
     margin-top: 4px;
 }
 
-/* --- VENTANAS --- */
+/* --- RESPONSIVE MÓVIL --- */
+@media (max-width: 600px) {
+    .desktop {
+        grid-template-columns: repeat(3, 1fr);
+        padding: 70px 10px;
+        justify-items: center;
+    }
+
+    .app-icon { width: 100%; }
+    .icon-img { width: 60px; height: 60px; }
+    .app-icon span { font-size: 11px; }
+
+    .dock-item img {
+        width: 45px;
+        height: 45px;
+    }
+}
+
+/* Estilo de la ventana que se abre */
 .window-overlay {
-    display: none;
+    display: none; /* Escondida por defecto */
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.4);
+    background: rgba(0, 0, 0, 0.3); /* Fondo oscurecido suave */
     backdrop-filter: blur(5px);
     z-index: 5000;
     justify-content: center;
@@ -145,11 +166,11 @@ body {
 .window-container {
     width: 90%;
     max-width: 600px;
-    height: 75vh;
+    height: 70vh;
     background: white;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
     display: flex;
     flex-direction: column;
 }
@@ -161,12 +182,18 @@ body {
     align-items: center;
     padding: 0 15px;
     border-bottom: 1px solid #ddd;
+    position: relative;
+}
+
+.header-controls {
+    display: flex;
+    gap: 8px;
 }
 
 .dot-close {
     width: 12px;
     height: 12px;
-    background: #ff5f56;
+    background: #ff5f56; /* Botón rojo de cerrar */
     border-radius: 50%;
     cursor: pointer;
 }
@@ -176,62 +203,161 @@ body {
     text-align: center;
     color: #333;
     font-size: 14px;
-    font-weight: 600;
+    font-weight: 500;
+    margin-right: 20px; /* Para centrar respecto al botón */
 }
 
 .window-content {
     flex: 1;
     background: white;
-    overflow-y: auto;
+    overflow-y: auto;  
 }
 
-/* --- GALERÍA Y CONTENIDO --- */
+.sj-foto {
+    width: 80%;
+    max-width: 250px;
+    border-radius: 12px;
+    margin: 15px auto;
+    display: block;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.sj-container {
+    color: #333;
+    text-align: center;
+    padding: 20px;
+}
+
+.sj-title {
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+
+.sj-text {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.sj-subtext {
+    font-size: 14px;
+    color: #666;
+}
+
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr); /* 2 fotos por fila para que se vean grandes */
     gap: 10px;
     padding: 15px;
 }
 
-.gallery-item {
+.gallery-item-container {
+    position: relative;
     width: 100%;
     aspect-ratio: 1 / 1;
-    object-fit: cover;
-    border-radius: 12px;
+    overflow: hidden;
     cursor: pointer;
+}
+
+.gallery-item {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* Esto las hace cuadradas */
+    object-fit: cover;
+    border-radius: 12px; /* Bordes redondeados como en tu imagen */
+    cursor: pointer;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* El tiempito del video abajo a la derecha */
+.video-duration {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    font-size: 10px;
+    color: white;
+    background: rgba(0,0,0,0.5);
+    padding: 2px 5px;
+    border-radius: 4px;
 }
 
 .video-player-container {
     background: black;
     height: 100%;
+    position: relative;
     display: flex;
     align-items: center;
-    position: relative;
 }
 
-.full-video { width: 100%; max-height: 100%; }
+.full-video {
+    width: 100%;
+    max-height: 100%;
+}
 
 .back-btn {
     position: absolute;
     top: 10px;
     left: 10px;
-    color: #007aff;
+    color: #007aff; /* Azul típico de iOS */
     font-size: 17px;
     font-weight: bold;
     z-index: 100;
     cursor: pointer;
 }
 
-/* --- SAFARI NAVEGADOR --- */
-.safari-container { background: #ebebeb; height: 100%; display: flex; flex-direction: column; }
-.safari-address-bar { background: white; margin: 10px; padding: 8px; border-radius: 10px; text-align: center; }
-.url-text { color: #333; font-size: 14px; }
-.safari-offline-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; color: #2c2c2e; }
-.broken-heart-pixel { font-size: 50px; margin-bottom: 20px; }
 
-/* --- RESPONSIVE --- */
-@media (max-width: 600px) {
-    .desktop { grid-template-columns: repeat(3, 1fr); padding-top: 70px; }
-    .icon-img { width: 60px; height: 60px; }
-    .dock .icon-img { width: 45px; height: 45px; }
+/* musica */
+.musica { 
+    background-image: url('https://cdn-icons-png.flaticon.com/512/3844/3844720.png'); 
+    background-color: #ff2d55; /* Rojo tipo Apple Music */
+    background-size: 60%;
+}
+
+.safari-icon {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/888/888846.png');
+    background-size: 70%;
+}
+
+/* Estilos para el Navegador Safari */
+.safari-container {
+    background-color: #ebebeb; /* Gris claro de fondo */
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.safari-address-bar {
+    background-color: white;
+    margin: 10px;
+    padding: 8px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.url-text {
+    color: #333;
+    font-size: 14px;
+    font-family: -apple-system, sans-serif;
+}
+
+.safari-offline-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    text-align: center;
+    color: #2c2c2e;
+}
+
+.safari-offline-content h2 {
+    font-size: 20px;
+    color: #2c2c2e;
+    margin-bottom: 10px;
+}
+
+.safari-offline-content p {
+    font-size: 15px;
+    color: #636366;
+    line-height: 1.4;
 }
