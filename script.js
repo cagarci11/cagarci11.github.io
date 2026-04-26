@@ -20,14 +20,28 @@ function openApp(nombreApp) {
     titulo.innerText = nombreApp;
     ventana.style.display = 'flex';
 
+    // Lógica para el contenido de Galeria
+    if (nombreApp === 'Galería') {
+        // Aquí defines tus vídeos y sus miniaturas (puedes usar fotos para la miniatura)
+        contenido.innerHTML = `
+            <div class="gallery-grid">
+                <img src="oroRosa.jpg" class="gallery-item" onclick="playVideo('ValgaPena.mp4')">
+                <img src="sadSummer.jpg" class="gallery-item" onclick="playVideo('40noches.mp4')">
+                <img src="casanova.jpg" class="gallery-item" onclick="playVideo('ganas.mp4')">
+                <img src="23A.jpg" class="gallery-item" onclick="playVideo('tanFrio.mp4')">
+                </div>
+        `;
+        musica.pause();
+    }
+
     // Lógica para el contenido de San Jorge
     if (nombreApp === 'San Jorge') {
         contenido.innerHTML = `
         <div class="sj-container">
             <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
-            <p class="sj-text">espero q no expire nunca</p>
-            <p class="sj-subtext">Supongo que el día de San Jorge es subjetivo</p>
-            <p class="sj-subtext">Pero tranqui que no te quedas sin tu rosa</p>
+            <p class="sj-subtext">espero q no expire nunca</p>
+            <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
+            <p class="sj-text">Pero tranqui que no te quedas sin tu rosa</p>
 
             <img src="rosas.webp" class="sj-foto">
 
@@ -50,6 +64,20 @@ function closeCustomApp() {
         musica.pause();
         musica.currentTime = 0; // Reinicia la canción
     }
+}
+
+function playVideo(videoSrc) {
+    const contenido = document.getElementById('app-content-area');
+    
+    contenido.innerHTML = `
+        <div class="video-player-container">
+            <div class="back-btn" onclick="openApp('Galería')">← Volver</div>
+            <video class="full-video" controls autoplay>
+                <source src="${videoSrc}" type="video/mp4">
+                Tu navegador no soporta vídeos.
+            </video>
+        </div>
+    `;
 }
 
 function syncBattery() {
