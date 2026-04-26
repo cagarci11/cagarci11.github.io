@@ -302,6 +302,19 @@ body {
     cursor: pointer;
 }
 
+
+/* musica */
+.musica { 
+    background-image: url('https://cdn-icons-png.flaticon.com/512/3844/3844720.png'); 
+    background-color: #ff2d55; /* Rojo tipo Apple Music */
+    background-size: 60%;
+}
+
+.safari-icon {
+    background-image: url('https://cdn-icons-png.flaticon.com/512/888/888846.png');
+    background-size: 70%;
+}
+
 /* Estilos para el Navegador Safari */
 .safari-container {
     background-color: #ebebeb; /* Gris claro de fondo */
@@ -334,12 +347,6 @@ body {
     padding: 40px;
     text-align: center;
     color: #2c2c2e;
-}
-
-.broken-heart-pixel {
-    font-size: 60px; 
-    display: block;
-    margin-bottom: 15px;
 }
 
 .safari-offline-content h2 {

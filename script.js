@@ -71,6 +71,16 @@ function openApp(nombreApp) {
         // Reproducir solo SJ
         musicaSJ.play().catch(e => console.log("Error audio SJ"));
     } 
+    // musica
+    else if (nombreApp === 'Musica') {
+        contenido.innerHTML = `
+            <div style="text-align:center; padding:40px; color:#333;">
+                <img src="https://cdn-icons-png.flaticon.com/512/3844/3844720.png" style="width:100px; margin-bottom:20px;">
+                <h3>Tu Playlist</h3>
+                <p style="color: #666; margin-top:10px;">Próximamente...</p>
+            </div>
+        `;
+    }
     else {
         contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
     }
@@ -81,6 +91,7 @@ function closeCustomApp() {
     const ventana = document.getElementById('custom-window');
     const musicaSJ = document.getElementById('bg-music');
     const musicaSafari = document.getElementById('safari-music');
+    const contenido = document.getElementById('app-content-area');
 
     if (ventana) {
         ventana.style.display = 'none';
