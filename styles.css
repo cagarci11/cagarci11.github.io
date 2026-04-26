@@ -1,143 +1,139 @@
 :root {
-    --primary-gradient: linear-gradient(135deg, #ff4b2b, #ff416c);
-    --bg-light: #ffffff;
-    --text-dark: #333333;
+    --dock-bg: rgba(255, 255, 255, 0.25);
+    --text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.8);
 }
 
 * {
+    margin: 0;
+    padding: 0;
     box-sizing: border-box;
-    -webkit-tap-highlight-color: transparent; /* Quita el flash azul al tocar en móviles */
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-    background-color: #f0f2f5; /* Color de fondo fuera del "móvil" en PC */
-    display: flex;
-    justify-content: center;
+    font-family: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto;
     height: 100vh;
+    width: 100vw;
+    /* Usamos una imagen de fondo bonita */
+    background: url('https://images.unsplash.com/photo-1464802686167-b939a67e0b21?auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+    background-size: cover;
+    overflow: hidden;
+    color: white;
 }
 
-/* El contenedor principal ahora es la "pantalla" */
-.phone-app {
-    width: 100%;
-    max-width: 500px; /* Ancho máximo tipo móvil en escritorio */
-    height: 100%;
-    background-color: var(--bg-light);
-    display: flex;
-    flex-direction: column;
-    position: relative;
-    box-shadow: 0 0 20px rgba(0,0,0,0.1);
-}
-
-/* Barra de estado superior */
+/* BARRA SUPERIOR */
 .status-bar {
+    height: 25px;
+    background: rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10px 25px;
-    font-size: 14px;
-    font-weight: 600;
-    z-index: 10;
+    padding: 0 15px;
+    font-size: 12px;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
 }
 
-#clock {
-    letter-spacing: 0.5px;
+/* ESCRITORIO */
+.desktop {
+    padding: 40px 20px;
+    display: grid;
+    /* En PC: columnas fijas a la izquierda */
+    grid-template-columns: repeat(auto-fill, 80px); 
+    grid-auto-rows: 90px;
+    gap: 25px;
+    height: 100%;
 }
 
-/* Contenedor de las pantallas */
-.main-container {
-    flex: 1;
-    position: relative;
-    overflow-y: auto;
-}
-
-.screen {
-    display: none;
-    padding: 30px;
-    text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.screen.active {
+.app-icon {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    min-height: 100%;
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: scale(0.98); }
-    to { opacity: 1; transform: scale(1); }
-}
-
-/* Elementos Visuales */
-.emoji-header { font-size: 70px; margin-bottom: 10px; }
-
-.btn-primary {
-    background: var(--primary-gradient);
-    color: white;
-    border: none;
-    padding: 15px 40px;
-    border-radius: 30px;
-    font-size: 16px;
-    font-weight: bold;
     cursor: pointer;
-    margin-top: 20px;
+    transition: transform 0.2s;
+}
+
+.app-icon:active { transform: scale(0.9); }
+
+.icon-img {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background-size: cover;
+    margin-bottom: 5px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+/* Colores de iconos (puedes usar imágenes con background-image) */
+.galeria { background-color: #fff; background-image: url('https://cdn-icons-png.flaticon.com/512/1375/1375106.png'); }
+.amor { background-color: #ffeb3b; background-image: url('https://cdn-icons-png.flaticon.com/512/716/716784.png'); }
+.papelera { background-color: #cfd8dc; background-image: url('https://cdn-icons-png.flaticon.com/512/2891/2891491.png'); }
+.notas { background-color: #fff; background-image: url('https://cdn-icons-png.flaticon.com/512/1024/1024824.png'); }
+
+.app-icon span {
+    font-size: 11px;
+    text-align: center;
+    text-shadow: var(--text-shadow);
+    font-weight: 500;
+}
+
+/* EL DOCK */
+.dock-wrapper {
+    position: fixed;
+    bottom: 20px;
     width: 100%;
-    box-shadow: 0 4px 15px rgba(255, 75, 43, 0.3);
-}
-
-.btn-secondary {
-    background: #eee;
-    color: #555;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 20px;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.card {
-    background: white;
-    border: 1px solid #f0f0f0;
-    padding: 20px;
-    margin: 10px 0;
-    border-radius: 20px;
-    width: 100%;
-    cursor: pointer;
-    transition: background 0.2s;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-}
-
-.card:active { background: #f9f9f9; }
-
-/* Barra de navegación */
-.nav-bar {
-    height: 70px;
-    background: white;
-    border-top: 1px solid #eee;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding-bottom: env(safe-area-inset-bottom); /* Para el margen inferior de iPhones */
+    justify-content: center;
+    padding: 0 10px;
 }
 
-.nav-item {
-    font-size: 24px;
-    cursor: pointer;
+.dock {
+    background: var(--dock-bg);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border: 0.5px solid rgba(255,255,255,0.2);
     padding: 10px;
+    border-radius: 24px;
+    display: flex;
+    gap: 15px;
+    box-shadow: 0 15px 35px rgba(0,0,0,0.2);
 }
 
-.heart-animation {
-    font-size: 60px;
-    animation: pulse 1.5s infinite;
+.dock-item {
+    font-size: 30px;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
 }
 
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
+.dock-item:hover { transform: scale(1.2) translateY(-5px); }
+
+/* --- ADAPTACIÓN PARA MÓVIL --- */
+@media (max-width: 600px) {
+    .desktop {
+        /* En móvil: los iconos se centran y se organizan en 4 columnas */
+        grid-template-columns: repeat(4, 1fr);
+        padding-top: 60px;
+    }
+    
+    .status-bar {
+        background: transparent; /* Más estilo iPhone */
+    }
+
+    .system-info-left {
+        display: none; /* Ocultamos el nombre en móvil para dejar espacio */
+    }
+
+    .dock {
+        width: 100%; /* El dock ocupa casi todo el ancho en móvil */
+        justify-content: space-around;
+        border-radius: 30px;
+    }
 }

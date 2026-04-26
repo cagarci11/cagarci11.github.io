@@ -3,53 +3,46 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="mobile-web-app-capable" content="yes">
-    <title>Amor Ciego</title>
+    <title>Cupido OS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="phone-app">
     <div class="status-bar">
-        <span id="clock">00:00</span>
-        <div class="status-icons">
-            <span>📶</span>
-            <span>🔋</span>
+        <div class="system-info-left">Cupido's Desktop</div>
+        <div class="system-info-right">
+            <span id="clock">00:00</span>
+            <span class="battery">100% 🔋</span>
         </div>
     </div>
 
-    <main class="main-container">
-        <div class="screen active" id="home">
-            <div class="emoji-header">❤️</div>
-            <h1>Amor Ciego</h1>
-            <p>Encuentra tu pareja ideal sin prejuicios.</p>
-            <button class="btn-primary" onclick="goTo('page1')">Empezar aventura</button>
+    <main class="desktop">
+        <div class="app-icon" onclick="openApp('Galería')">
+            <div class="icon-img galeria"></div>
+            <span>Galería</span>
         </div>
-
-        <div class="screen" id="page1">
-            <h2>¿Qué buscas?</h2>
-            <p>Elige una opción para continuar</p>
-            <div class="card" onclick="goTo('page2')">🔍 Buscar Pareja</div>
-            <div class="card" onclick="goTo('page2')">💬 Chats Activos</div>
-            <button class="btn-secondary" onclick="goTo('home')">Volver</button>
+        <div class="app-icon" onclick="openApp('Amor')">
+            <div class="icon-img amor"></div>
+            <span>EXPORTS_Amor</span>
         </div>
-
-        <div class="screen" id="page2">
-            <h2>Símbolo de Amor</h2>
-            <div class="heart-animation">💖</div>
-            <p>Esta es una sección especial simulada.</p>
-            <button class="btn-primary" onclick="goTo('page1')">Entendido</button>
+        <div class="app-icon" onclick="openApp('Papelera')">
+            <div class="icon-img papelera"></div>
+            <span>Papelera</span>
+        </div>
+        <div class="app-icon" onclick="openApp('Notas')">
+            <div class="icon-img notas"></div>
+            <span>Notas</span>
         </div>
     </main>
 
-    <nav class="nav-bar">
-        <div class="nav-item" onclick="goTo('home')">🏠</div>
-        <div class="nav-item" onclick="goTo('page1')">🔥</div>
-        <div class="nav-item" onclick="goTo('page2')">👤</div>
-    </nav>
-</div>
+    <div class="dock-wrapper">
+        <nav class="dock">
+            <div class="dock-item" onclick="openApp('Safari')">🧭</div>
+            <div class="dock-item" onclick="openApp('Chat')">💬</div>
+            <div class="dock-item" onclick="openApp('Config')">⚙️</div>
+        </nav>
+    </div>
 
-<script src="script.js"></script>
+    <script src="script.js"></script>
 </body>
 </html>

@@ -1,30 +1,18 @@
-// Función para cambiar de pantalla
-function goTo(pageId) {
-    const screens = document.querySelectorAll(".screen");
-    
-    screens.forEach(screen => {
-        screen.classList.remove("active");
-    });
-
-    const target = document.getElementById(pageId);
-    if (target) {
-        target.classList.add("active");
-    }
-}
-
-// Función para actualizar el reloj
+// Actualizar reloj
 function updateClock() {
     const now = new Date();
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-
-    // Formato 00:00
-    hours = hours < 10 ? '0' + hours : hours;
-    minutes = minutes < 10 ? '0' + minutes : minutes;
-
-    document.getElementById('clock').textContent = hours + ':' + minutes;
+    let h = now.getHours();
+    let m = now.getMinutes();
+    m = m < 10 ? '0' + m : m;
+    document.getElementById('clock').textContent = h + ':' + m;
 }
 
-// Iniciar reloj y actualizar cada segundo
 setInterval(updateClock, 1000);
 updateClock();
+
+// Función para simular abrir Apps
+function openApp(appName) {
+    console.log("Abriendo: " + appName);
+    // Aquí puedes hacer que aparezca un mensaje o una ventana real
+    alert("Has abierto " + appName + ". ¡Pronto estará disponible!");
+}
