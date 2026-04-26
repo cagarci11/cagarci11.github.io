@@ -9,9 +9,15 @@ body {
     font-family: -apple-system, system-ui, sans-serif;
     height: 100vh;
     width: 100vw;
-    /* Fondo de nubes */
-    background: url('https://images.unsplash.com/photo-1501630834273-4b5604d2ee31?q=80&w=2070&auto=format&fit=crop') no-repeat center center;
+    
+    
+    background-image: url('https://recycledj.pavloh.com/merch'); 
+    
+    background-position: center center;
+    background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed; /* Esto hace que el fondo no se mueva al hacer scroll */
+    
     overflow: hidden;
     color: white;
 }
@@ -99,5 +105,76 @@ body {
     .app-icon span {
         font-size: 11px; /* Texto más compacto para móvil */
         white-space: nowrap;
+    }
+}
+
+/* --- EL DOCK FLOTANTE --- */
+.dock-container {
+    position: fixed;
+    bottom: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    z-index: 1000;
+    padding: 0 10px;
+}
+
+.dock {
+    background: rgba(255, 255, 255, 0.25); /* Fondo blanquecino traslúcido */
+    backdrop-filter: blur(15px); /* Efecto cristal */
+    -webkit-backdrop-filter: blur(15px);
+    padding: 8px 15px;
+    border-radius: 22px;
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.dock-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.dock-item:hover {
+    transform: scale(1.2) translateY(-10px); /* El icono crece y sube al pasar el ratón */
+}
+
+.dock-item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+/* El puntito blanco debajo del icono */
+.dot {
+    width: 4px;
+    height: 4px;
+    background: white;
+    border-radius: 50%;
+    margin-top: 4px;
+    opacity: 0.8;
+}
+
+/* AJUSTE PARA MÓVIL (Para que el dock no sea gigante) */
+@media (max-width: 600px) {
+    .dock {
+        padding: 6px 10px;
+        gap: 8px;
+        border-radius: 18px;
+    }
+    
+    .dock-item img {
+        width: 42px;
+        height: 42px;
+    }
+    
+    .dock-container {
+        bottom: 15px;
     }
 }
