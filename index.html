@@ -2,52 +2,52 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mobile Simulation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>Amor Ciego</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<div class="phone">
-    <div class="notch"></div>
+<div class="phone-app">
     <div class="status-bar">
-        <span>9:41</span>
-        <div class="icons">📶 🔋</div>
+        <span id="clock">00:00</span>
+        <div class="status-icons">
+            <span>📶</span>
+            <span>🔋</span>
+        </div>
     </div>
 
-    <div class="screen active" id="home">
-        <div class="content">
+    <main class="main-container">
+        <div class="screen active" id="home">
             <div class="emoji-header">❤️</div>
             <h1>Amor Ciego</h1>
             <p>Encuentra tu pareja ideal sin prejuicios.</p>
             <button class="btn-primary" onclick="goTo('page1')">Empezar aventura</button>
         </div>
-    </div>
 
-    <div class="screen" id="page1">
-        <div class="content">
+        <div class="screen" id="page1">
             <h2>¿Qué buscas?</h2>
             <p>Elige una opción para continuar</p>
             <div class="card" onclick="goTo('page2')">🔍 Buscar Pareja</div>
             <div class="card" onclick="goTo('page2')">💬 Chats Activos</div>
             <button class="btn-secondary" onclick="goTo('home')">Volver</button>
         </div>
-    </div>
 
-    <div class="screen" id="page2">
-        <div class="content">
+        <div class="screen" id="page2">
             <h2>Símbolo de Amor</h2>
             <div class="heart-animation">💖</div>
             <p>Esta es una sección especial simulada.</p>
             <button class="btn-primary" onclick="goTo('page1')">Entendido</button>
         </div>
-    </div>
+    </main>
 
-    <div class="nav-bar">
+    <nav class="nav-bar">
         <div class="nav-item" onclick="goTo('home')">🏠</div>
         <div class="nav-item" onclick="goTo('page1')">🔥</div>
         <div class="nav-item" onclick="goTo('page2')">👤</div>
-    </div>
+    </nav>
 </div>
 
 <script src="script.js"></script>
