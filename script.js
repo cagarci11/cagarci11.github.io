@@ -12,17 +12,24 @@ updateClock();
 
 // Función para simular abrir Apps
 function openApp(nombreApp) {
-    console.log("Intentando abrir app: " + nombre);
+    console.log("Intentando abrir app: " + nombreApp);
 
-    // 1. Buscamos la ventana y el título
     const ventana = document.getElementById('custom-window');
     const titulo = document.getElementById('window-title');
     
     if (ventana && titulo) {
-        titulo.innerText = nombre; // Cambia "Cargando..." por el nombre
-        ventana.style.display = 'flex'; // Muestra la ventana
+        // AQUÍ ESTABA EL FALLO: Ahora usamos nombreApp
+        titulo.innerText = nombreApp; 
+        ventana.style.display = 'flex'; 
     } else {
         console.error("No se encontró la ventana o el título en el HTML");
+    }
+}
+
+function closeCustomApp() {
+    const ventana = document.getElementById('custom-window');
+    if (ventana) {
+        ventana.style.display = 'none';
     }
 }
 
@@ -57,10 +64,3 @@ function syncBattery() {
 
 // Ejecutamos la función
 syncBattery();
-
-function closeCustomApp() {
-    const ventana = document.getElementById('custom-window');
-    if (ventana) {
-        ventana.style.display = 'none';
-    }
-}
