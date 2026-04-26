@@ -18,7 +18,7 @@
 
     <main class="desktop">
         <div class="app-icon" onclick="openApp('San Jorge')">
-            <div class="icon-img" style="background-image: url('SJ.jpg'); background-color: white; background-size: cover;"></div>
+            <div class="icon-img" style="background-image: url('SJ.jpg'); background-size: cover;"></div>
             <span>SJ</span>
         </div>
         <div class="app-icon" onclick="openApp('Galería')">
@@ -26,7 +26,7 @@
             <span>Videos</span>
         </div>
         <div class="app-icon" onclick="openApp('Notas')">
-            <div class="icon-img" style="background-image: url('notas.png'); background-color: white; background-size: cover;"></div>
+            <div class="icon-img notas"></div>
             <span>Notas</span>
         </div>
         <div class="app-icon" onclick="openApp('Amor')">
@@ -34,7 +34,7 @@
             <span>EXPORTS</span>
         </div>
         <div class="app-icon" onclick="openApp('Musica')">
-            <div class="icon-img" style="background-image: url('musica.png'); background-color: white; background-size: cover;"></div>
+            <div class="icon-img musica"></div>
             <span>Música</span>
         </div>
         <div class="app-icon" onclick="openApp('Safari')">
@@ -49,20 +49,20 @@
 
     <div class="dock-container">
         <nav class="dock">
-            <div class="dock-item" onclick="openApp('Galería')">
-                <img src="https://cdn-icons-png.flaticon.com/512/1375/1375106.png" alt="Fotos">
+            <div class="dock-item" onclick="openApp('Notas')">
+                <div class="icon-img notas"></div>
                 <div class="dot"></div>
             </div>
-            <div class="dock-item" onclick="openApp('Notas')">
-                <div class="icon-img" style="background-image: url('notas.png'); background-color: white; background-size: cover;"></div>
+            <div class="dock-item" onclick="openApp('Galería')">
+                <div class="icon-img galeria"></div>
                 <div class="dot"></div>
             </div>
             <div class="dock-item" onclick="openApp('Safari')">
-                <img src="https://cdn-icons-png.flaticon.com/512/888/888846.png" alt="Navegador">
+                <div class="icon-img safari-icon"></div>
                 <div class="dot"></div>
             </div>
             <div class="dock-item" onclick="openApp('Papelera')">
-                <img src="https://cdn-icons-png.flaticon.com/512/2891/2891491.png" alt="Papelera">
+                <div class="icon-img papelera"></div>
                 <div class="dot"></div>
             </div>
         </nav>
@@ -76,14 +76,10 @@
                 </div>
                 <span id="window-title" class="window-title">Cargando...</span>
             </div>
-            <div class="window-content" id="app-content-area">
-            </div>
-            <audio id="bg-music" loop>
-                <source src="nosotros.mp3" type="audio/mpeg">
-            </audio>
-            <audio id="safari-music" loop>
-                <source src="noHayManera.m4a" type="audio/mp4">
-            </audio>
+            <div class="window-content" id="app-content-area"></div>
+            
+            <audio id="bg-music" loop><source src="nosotros.mp3" type="audio/mpeg"></audio>
+            <audio id="safari-music" loop><source src="noHayManera.m4a" type="audio/mp4"></audio>
         </div>
     </div>
 

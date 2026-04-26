@@ -9,10 +9,7 @@ body {
     font-family: -apple-system, system-ui, sans-serif;
     height: 100vh;
     width: 100vw;
-    
-    /* CAMBIO AQUÍ: Usa el nombre de tu archivo subido a GitHub */
     background-image: url('fondo.png'); 
-    
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
@@ -24,9 +21,9 @@ body {
 /* --- BARRA SUPERIOR --- */
 .status-bar {
     height: 30px;
-    background: rgba(120, 120, 120, 0.7);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
+    background: rgba(120, 120, 120, 0.5);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -35,18 +32,17 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    z-index: 2000; /* Aumentamos el z-index para que siempre esté arriba */
+    z-index: 2000;
 }
 
 /* --- ESCRITORIO --- */
 .desktop {
-    padding: 60px 30px;
+    padding: 60px 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fill, 110px);
-    grid-auto-rows: 120px;
+    grid-template-columns: repeat(auto-fill, 100px);
     gap: 20px;
-    /* Ajustamos el alto para que no tape el Dock */
-    height: calc(100vh - 100px); 
+    justify-content: center;
+    height: calc(100vh - 120px); 
     overflow-y: auto;
 }
 
@@ -56,55 +52,64 @@ body {
     align-items: center;
     cursor: pointer;
     text-align: center;
-    width: 100px;
 }
 
+.app-icon span {
+    font-size: 12px;
+    margin-top: 5px;
+    font-weight: 500;
+    text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+}
+
+/* --- ESTILO BASE DE ICONOS (Escritorio y Dock) --- */
 .icon-img {
     width: 70px;
     height: 70px;
     border-radius: 15px;
     background-color: white;
-    background-size: 70%;
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    margin-bottom: 8px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
-.app-icon span {
-    font-size: 13px;
-    font-weight: 500;
-    text-shadow: 1px 1px 3px rgba(0,0,0,0.9);
+/* Ajuste para que en el Dock sean un poco más pequeños */
+.dock .icon-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 12px;
+    box-shadow: none;
 }
 
-/* Iconos */
-.galeria { background-image: url('https://cdn-icons-png.flaticon.com/512/1375/1375106.png'); }
-.amor { background-image: url('https://cdn-icons-png.flaticon.com/512/716/716784.png'); background-color: #90caf9; }
-.papelera { background-image: url('https://cdn-icons-png.flaticon.com/512/2891/2891491.png'); }
-.notas { background-image: url('https://cdn-icons-png.flaticon.com/512/1024/1024824.png'); }
+/* --- ASIGNACIÓN DE IMÁGENES --- */
+.notas { background-image: url('notas.png'); }
+.musica { background-image: url('musica.png'); }
+.galeria { background-image: url('https://cdn-icons-png.flaticon.com/512/1375/1375106.png'); background-size: 70%; }
+.amor { background-image: url('https://cdn-icons-png.flaticon.com/512/716/716784.png'); background-size: 70%; }
+.safari-icon { background-image: url('https://cdn-icons-png.flaticon.com/512/888/888846.png'); background-size: 70%; }
+.papelera { background-image: url('https://cdn-icons-png.flaticon.com/512/2891/2891491.png'); background-size: 70%; }
 
-/* --- DOCK FLOTANTE (Global) --- */
+/* --- DOCK FLOTANTE --- */
 .dock-container {
     position: fixed;
     bottom: 20px;
     width: 100%;
     display: flex;
     justify-content: center;
-    z-index: 3000; /* Capa más alta de todas */
+    z-index: 3000;
     padding: 0 10px;
 }
 
 .dock {
     background: rgba(255, 255, 255, 0.25);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
-    padding: 10px 20px;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    padding: 10px 15px;
     border-radius: 24px;
     display: flex;
     align-items: center;
-    gap: 15px;
-    border: 1px solid rgba(255, 255, 255, 0.3);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .dock-item {
@@ -112,13 +117,6 @@ body {
     flex-direction: column;
     align-items: center;
     cursor: pointer;
-    transition: transform 0.2s ease;
-}
-
-.dock-item img {
-    width: 55px;
-    height: 55px;
-    border-radius: 12px;
 }
 
 .dot {
@@ -129,33 +127,15 @@ body {
     margin-top: 4px;
 }
 
-/* --- RESPONSIVE MÓVIL --- */
-@media (max-width: 600px) {
-    .desktop {
-        grid-template-columns: repeat(3, 1fr);
-        padding: 70px 10px;
-        justify-items: center;
-    }
-
-    .app-icon { width: 100%; }
-    .icon-img { width: 60px; height: 60px; }
-    .app-icon span { font-size: 11px; }
-
-    .dock-item img {
-        width: 45px;
-        height: 45px;
-    }
-}
-
-/* Estilo de la ventana que se abre */
+/* --- VENTANAS --- */
 .window-overlay {
-    display: none; /* Escondida por defecto */
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.3); /* Fondo oscurecido suave */
+    background: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(5px);
     z-index: 5000;
     justify-content: center;
@@ -165,11 +145,11 @@ body {
 .window-container {
     width: 90%;
     max-width: 600px;
-    height: 70vh;
+    height: 75vh;
     background: white;
     border-radius: 20px;
     overflow: hidden;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
     display: flex;
     flex-direction: column;
 }
@@ -181,18 +161,12 @@ body {
     align-items: center;
     padding: 0 15px;
     border-bottom: 1px solid #ddd;
-    position: relative;
-}
-
-.header-controls {
-    display: flex;
-    gap: 8px;
 }
 
 .dot-close {
     width: 12px;
     height: 12px;
-    background: #ff5f56; /* Botón rojo de cerrar */
+    background: #ff5f56;
     border-radius: 50%;
     cursor: pointer;
 }
@@ -202,161 +176,62 @@ body {
     text-align: center;
     color: #333;
     font-size: 14px;
-    font-weight: 500;
-    margin-right: 20px; /* Para centrar respecto al botón */
+    font-weight: 600;
 }
 
 .window-content {
     flex: 1;
     background: white;
-    overflow-y: auto;  
+    overflow-y: auto;
 }
 
-.sj-foto {
-    width: 80%;
-    max-width: 250px;
-    border-radius: 12px;
-    margin: 15px auto;
-    display: block;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-}
-
-.sj-container {
-    color: #333;
-    text-align: center;
-    padding: 20px;
-}
-
-.sj-title {
-    font-size: 18px;
-    margin-bottom: 10px;
-}
-
-.sj-text {
-    font-weight: bold;
-    margin-bottom: 5px;
-}
-
-.sj-subtext {
-    font-size: 14px;
-    color: #666;
-}
-
+/* --- GALERÍA Y CONTENIDO --- */
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 fotos por fila para que se vean grandes */
+    grid-template-columns: repeat(2, 1fr);
     gap: 10px;
     padding: 15px;
 }
 
-.gallery-item-container {
-    position: relative;
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    overflow: hidden;
-    cursor: pointer;
-}
-
 .gallery-item {
     width: 100%;
-    aspect-ratio: 1 / 1; /* Esto las hace cuadradas */
+    aspect-ratio: 1 / 1;
     object-fit: cover;
-    border-radius: 12px; /* Bordes redondeados como en tu imagen */
+    border-radius: 12px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-}
-
-/* El tiempito del video abajo a la derecha */
-.video-duration {
-    position: absolute;
-    bottom: 5px;
-    right: 5px;
-    font-size: 10px;
-    color: white;
-    background: rgba(0,0,0,0.5);
-    padding: 2px 5px;
-    border-radius: 4px;
 }
 
 .video-player-container {
     background: black;
     height: 100%;
-    position: relative;
     display: flex;
     align-items: center;
+    position: relative;
 }
 
-.full-video {
-    width: 100%;
-    max-height: 100%;
-}
+.full-video { width: 100%; max-height: 100%; }
 
 .back-btn {
     position: absolute;
     top: 10px;
     left: 10px;
-    color: #007aff; /* Azul típico de iOS */
+    color: #007aff;
     font-size: 17px;
     font-weight: bold;
     z-index: 100;
     cursor: pointer;
 }
 
+/* --- SAFARI NAVEGADOR --- */
+.safari-container { background: #ebebeb; height: 100%; display: flex; flex-direction: column; }
+.safari-address-bar { background: white; margin: 10px; padding: 8px; border-radius: 10px; text-align: center; }
+.url-text { color: #333; font-size: 14px; }
+.safari-offline-content { flex: 1; display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 30px; text-align: center; color: #2c2c2e; }
+.broken-heart-pixel { font-size: 50px; margin-bottom: 20px; }
 
-/* musica */
-.musica { 
-    background-image: url('https://cdn-icons-png.flaticon.com/512/3844/3844720.png'); 
-    background-color: #ff2d55; /* Rojo tipo Apple Music */
-    background-size: 60%;
-}
-
-.safari-icon {
-    background-image: url('https://cdn-icons-png.flaticon.com/512/888/888846.png');
-    background-size: 70%;
-}
-
-/* Estilos para el Navegador Safari */
-.safari-container {
-    background-color: #ebebeb; /* Gris claro de fondo */
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-}
-
-.safari-address-bar {
-    background-color: white;
-    margin: 10px;
-    padding: 8px;
-    border-radius: 10px;
-    text-align: center;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-}
-
-.url-text {
-    color: #333;
-    font-size: 14px;
-    font-family: -apple-system, sans-serif;
-}
-
-.safari-offline-content {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 40px;
-    text-align: center;
-    color: #2c2c2e;
-}
-
-.safari-offline-content h2 {
-    font-size: 20px;
-    color: #2c2c2e;
-    margin-bottom: 10px;
-}
-
-.safari-offline-content p {
-    font-size: 15px;
-    color: #636366;
-    line-height: 1.4;
+/* --- RESPONSIVE --- */
+@media (max-width: 600px) {
+    .desktop { grid-template-columns: repeat(3, 1fr); padding-top: 70px; }
+    .icon-img { width: 60px; height: 60px; }
+    .dock .icon-img { width: 45px; height: 45px; }
 }
