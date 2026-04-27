@@ -15,15 +15,15 @@ function openApp(nombreApp) {
     const ventana = document.getElementById('custom-window');
     const titulo = document.getElementById('window-title');
     const contenido = document.getElementById('app-content-area');
-    
+
     // Referencias directas
     const musicaSJ = document.getElementById('bg-music');
     const musicaSafari = document.getElementById('safari-music');
 
     // 1. Reset total de audios antes de hacer NADA
-    musicaSJ.pause(); 
+    musicaSJ.pause();
     musicaSJ.currentTime = 0;
-    musicaSafari.pause(); 
+    musicaSafari.pause();
     musicaSafari.currentTime = 0;
 
     titulo.innerText = nombreApp;
@@ -38,7 +38,7 @@ function openApp(nombreApp) {
                 <img src="23A.jpg" class="gallery-item" onclick="playVideo('tanFrio.mp4')">
             </div>
         `;
-    } 
+    }
     else if (nombreApp === 'Safari' || nombreApp === 'Navegador') {
         contenido.innerHTML = `
             <div class="safari-container">
@@ -70,7 +70,7 @@ function openApp(nombreApp) {
         `;
         // Reproducir solo SJ
         musicaSJ.play().catch(e => console.log("Error audio SJ"));
-    } 
+    }
     // musica
     else if (nombreApp === 'Musica') {
         contenido.innerHTML = `
@@ -80,9 +80,75 @@ function openApp(nombreApp) {
             </div>
         `;
     }
+    // Dentro de la función openApp(nombreApp)...
+
+    else if (nombreApp === 'Notas') {
+        const misNotas = [
+            {
+                id: 1,
+                titulo: "2/150??",
+                preview: "Las tornas han...",
+                fecha: "10 de abril de 2026",
+                cuerpo: "Las tornas han cambiado, \ny eso sí lo tengo claro \n150 rolas q ella si q se ha escuchado \nescuchando recy tiradas sobre el pasto \nahora sí q estoy soñando \nespinas y rosas decorando mi cuarto \nlo estaba manifestando \ncomo Nico miseria sin un duro en la cartera \npero está noche se cena donde la niña quiera \ny si pide la luna entera \nartemis III saldra rápido a por ella"
+            },
+            {
+                id: 2,
+                titulo: "...",
+                preview: "Ahora me...",
+                fecha: "28 de febrero de 2026",
+                cuerpo: "Ahora me ha dado por los vinilos, \nmañana me dará por querer estar contigo"
+            },
+            {
+                id: 3,
+                titulo: "Lista",
+                preview: "huevos...",
+                fecha: "20 de abril de 2026",
+                cuerpo: "patatas \ntaquitos de jamon \ntortitas \narroz \nfiletes de pollo \nleche sin lactosa \ncereales sin gluten \n(no puede comer mas)"
+            }
+        ];
+
+        let listaHTML = '';
+        misNotas.forEach(nota => {
+            // ARREGLADO: Comillas corregidas aquí abajo
+            listaHTML += `
+            <div class="note-item" onclick='mostrarNotaDetail(${JSON.stringify(nota)}, this)'>
+                <h4>${nota.titulo}</h4>
+                <p>${nota.preview}</p>
+                <span>${nota.fecha}</span>
+            </div>
+            `;
+        });
+
+        contenido.innerHTML = `
+        <div class="notes-app-container">
+            <div class="notes-sidebar">
+                ${listaHTML}
+            </div>
+            <div class="notes-content" id="note-display">
+                <p style="color:#8e8e93; text-align:center; margin-top:50px;">Selecciona una nota para leerla</p>
+            </div>
+        </div>
+        `;
+    }
     else {
         contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
     }
+}
+
+// Solo para la app notas:
+
+function mostrarNotaDetail(nota, elemento) {
+    // Quitar clase active de todos
+    document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
+    // Añadir al seleccionado
+    elemento.classList.add('active');
+
+    const display = document.getElementById('note-display');
+    display.innerHTML = `
+        <h2 class="note-detail-title">${nota.titulo}</h2>
+        <span class="note-detail-date">${nota.fecha}</span>
+        <div class="note-detail-body">${nota.cuerpo.replace(/\n/g, '<br>')}</div>
+    `;
 }
 
 // ESTA FUNCIÓN ES LA QUE CIERRA TODO
@@ -94,11 +160,11 @@ function closeCustomApp() {
 
     if (ventana) {
         ventana.style.display = 'none';
-        
+
         // Pausa forzada
         musicaSJ.pause();
         musicaSafari.pause();
-        
+
         // Reset del tiempo
         musicaSJ.currentTime = 0;
         musicaSafari.currentTime = 0;
@@ -110,7 +176,7 @@ function closeCustomApp() {
 
 function playVideo(videoSrc) {
     const contenido = document.getElementById('app-content-area');
-    
+
     contenido.innerHTML = `
         <div class="video-player-container">
             <div class="back-btn" onclick="openApp('Galería')">← Volver</div>
@@ -125,13 +191,13 @@ function playVideo(videoSrc) {
 function syncBattery() {
     // Verificamos si el navegador soporta esta función
     if ('getBattery' in navigator) {
-        navigator.getBattery().then(function(battery) {
-            
+        navigator.getBattery().then(function (battery) {
+
             // Función para actualizar el texto en la pantalla
             function updateBatteryUI() {
                 const level = Math.floor(battery.level * 100);
                 const isCharging = battery.charging ? "⚡" : "🔋";
-                
+
                 // Buscamos el elemento con la clase "battery" que creamos antes
                 const batteryElement = document.querySelector('.battery');
                 if (batteryElement) {
