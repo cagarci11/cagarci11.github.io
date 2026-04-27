@@ -317,6 +317,12 @@ body {
 }
 
 /* Estilos para el Navegador Safari */
+.broken-heart-pixel {
+    font-size: 60px; /* Tamaño del emoticono */
+    display: block;
+    margin-bottom: 15px;
+}
+
 .safari-container {
     background-color: #ebebeb; /* Gris claro de fondo */
     height: 100%;

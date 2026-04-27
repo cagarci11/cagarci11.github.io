@@ -46,7 +46,7 @@ function openApp(nombreApp) {
                     <div class="url-text">conamør.com</div>
                 </div>
                 <div class="safari-offline-content">
-                    <div class="broken-heart-pixel">💔</div>
+                    <div class="broken-heart-pixel" style="font-size: 50px; margin-bottom: 20px;">💔</div>
                     <h2>Sin conexión a Internet</h2>
                     <p>Comprueba tu conexión Wi-Fi o de datos móviles, o recibe una notificación cuando vuelva la conexión</p>
                 </div>
@@ -75,7 +75,6 @@ function openApp(nombreApp) {
     else if (nombreApp === 'Musica') {
         contenido.innerHTML = `
             <div style="text-align:center; padding:40px; color:#333;">
-                <img src="https://cdn-icons-png.flaticon.com/512/3844/3844720.png" style="width:100px; margin-bottom:20px;">
                 <h3>Tu Playlist</h3>
                 <p style="color: #666; margin-top:10px;">Próximamente...</p>
             </div>
