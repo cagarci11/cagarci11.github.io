@@ -80,43 +80,17 @@ function openApp(nombreApp) {
             </div>
         `;
     }
-    // Dentro de la función openApp(nombreApp)...
-
+    // notas
     else if (nombreApp === 'Notas') {
-        const misNotas = [
-            {
-                id: 1,
-                titulo: "2/150??",
-                preview: "Las tornas han...",
-                fecha: "10 de abril de 2026",
-                cuerpo: "Las tornas han cambiado, \ny eso sí lo tengo claro \n150 rolas q ella si q se ha escuchado \nescuchando recy tiradas sobre el pasto \nahora sí q estoy soñando \nespinas y rosas decorando mi cuarto \nlo estaba manifestando \ncomo Nico miseria sin un duro en la cartera \npero está noche se cena donde la niña quiera \ny si pide la luna entera \nartemis III saldra rápido a por ella"
-            },
-            {
-                id: 2,
-                titulo: "...",
-                preview: "Ahora me...",
-                fecha: "28 de febrero de 2026",
-                cuerpo: "Ahora me ha dado por los vinilos, \nmañana me dará por querer estar contigo"
-            },
-            {
-                id: 3,
-                titulo: "Lista",
-                preview: "huevos...",
-                fecha: "20 de abril de 2026",
-                cuerpo: "patatas \ntaquitos de jamon \ntortitas \narroz \nfiletes de pollo \nleche sin lactosa \ncereales sin gluten \n(no puede comer mas)"
-            }
-        ];
-
         let listaHTML = '';
-        misNotas.forEach(nota => {
-            // ARREGLADO: Comillas corregidas aquí abajo
+        misNotasContenidos.forEach(nota => {
             listaHTML += `
-                <div class="note-item" onclick="mostrarNotaPorId(${nota.id}, this)">
-                    <h4>${nota.titulo}</h4>
-                    <p>${nota.preview}</p>
-                    <span>${nota.fecha}</span>
-                </div>
-            `;
+            <div class="note-item" onclick="mostrarNotaPorId(${nota.id}, this)">
+                <h4>${nota.titulo}</h4>
+                <p>${nota.preview}</p>
+                <span>${nota.fecha}</span>
+            </div>
+        `;
         });
 
         contenido.innerHTML = `
@@ -128,7 +102,7 @@ function openApp(nombreApp) {
                 <p style="color:#8e8e93; text-align:center; margin-top:50px;">Selecciona una nota para leerla</p>
             </div>
         </div>
-        `;
+    `;
     }
     else {
         contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
@@ -136,32 +110,52 @@ function openApp(nombreApp) {
 }
 
 // Solo para la app notas:
-function mostrarNotaPorId(id, elemento) {
-    // 1. Buscamos la nota en el array (tenemos que declarar misNotas fuera o volver a definir el array aquí)
-    // Para que sea más fácil, recuperamos los datos del array que ya definiste en openApp
-    const notas = [
-        { id: 1, titulo: "2/150??", fecha: "10 de abril de 2026", cuerpo: "Las tornas han cambiado..." },
-        { id: 2, titulo: "...", fecha: "28 de febrero de 2026", cuerpo: "Ahora me ha dado por los vinilos..." },
-        { id: 3, titulo: "Lista", fecha: "20 de abril de 2026", cuerpo: "patatas..." }
-    ];
-    
-    const nota = notas.find(n => n.id === id);
 
-    // 2. Quitamos el active de los demás
+// Definimos las notas fuera de las funciones para que estén disponibles siempre
+const misNotasContenidos = [
+    {
+        id: 1,
+        titulo: "2/150??",
+        preview: "Las tornas han...",
+        fecha: "10 de abril de 2026",
+        cuerpo: "Las tornas han cambiado, \ny eso sí lo tengo claro \n150 rolas q ella si q se ha escuchado \nescuchando recy tiradas sobre el pasto \nahora sí q estoy soñando \nespinas y rosas decorando mi cuarto \nlo estaba manifestando \ncomo Nico miseria sin un duro en la cartera \npero está noche se cena donde la niña quiera \ny si pide la luna entera \nartemis III saldra rápido a por ella"
+    },
+    {
+        id: 2,
+        titulo: "...",
+        preview: "Ahora me...",
+        fecha: "28 de febrero de 2026",
+        cuerpo: "Ahora me ha dado por los vinilos, \nmañana me dará por querer estar contigo"
+    },
+    {
+        id: 3,
+        titulo: "Lista",
+        preview: "huevos...",
+        fecha: "20 de abril de 2026",
+        cuerpo: "patatas \ntaquitos de jamon \ntortitas \narroz \nfiletes de pollo \nleche sin lactosa \ncereales sin gluten \n(no puede comer mas)"
+    }
+];
+
+function mostrarNotaPorId(id, elemento) {
+    // Buscamos la nota en el array global
+    const nota = misNotasContenidos.find(n => n.id === id);
+
+    // Quitamos el active de otros y ponemos al actual
     document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
     elemento.classList.add('active');
 
-    // 3. Pintamos
     const display = document.getElementById('note-display');
-    display.innerHTML = `
-        <h2 class="note-detail-title">${nota.titulo}</h2>
-        <span class="note-detail-date">${nota.fecha}</span>
-        <div class="note-detail-body">${nota.cuerpo.replace(/\n/g, '<br>')}</div>
-    `;
-    
-    // 4. OPCIONAL: En móvil, podemos hacer scroll automático hacia abajo para ver la nota
-    if(window.innerWidth < 600) {
-        display.scrollIntoView({ behavior: 'smooth' });
+    if (display && nota) {
+        display.innerHTML = `
+            <h2 class="note-detail-title">${nota.titulo}</h2>
+            <span class="note-detail-date">${nota.fecha}</span>
+            <div class="note-detail-body">${nota.cuerpo.replace(/\n/g, '<br>')}</div>
+        `;
+        
+        // Si es móvil, hace scroll para ver el contenido
+        if(window.innerWidth < 600) {
+            display.scrollIntoView({ behavior: 'smooth' });
+        }
     }
 }
 

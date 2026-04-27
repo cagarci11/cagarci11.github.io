@@ -436,10 +436,11 @@ body {
 
 /* Columna Derecha: Contenido */
 .notes-content {
-    width: 65%;
-    padding: 20px;
+    flex: 1; /* Esto hace que ocupe todo el espacio sobrante */
+    padding: 30px;
     background-color: #ffffff;
     overflow-y: auto;
+    text-align: left; /* Asegura que el poema se alinee a la izquierda */
 }
 
 .note-detail-title {
@@ -457,10 +458,10 @@ body {
 }
 
 .note-detail-body {
-    font-size: 15px;
-    color: #3a3a3c;
-    line-height: 1.5;
-    white-space: pre-wrap;
+    font-size: 16px;
+    line-height: 1.6;
+    color: #333;
+    margin-top: 10px;
 }
 
 /* Esto asegura que en pantallas pequeñas las columnas no se aplasten */
