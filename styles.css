@@ -462,3 +462,26 @@ body {
     line-height: 1.5;
     white-space: pre-wrap;
 }
+
+/* Esto asegura que en pantallas pequeñas las columnas no se aplasten */
+@media (max-width: 600px) {
+    .notes-app-container {
+        flex-direction: column; /* Apilamos una columna sobre otra o controlamos su ancho */
+    }
+
+    .notes-sidebar {
+        width: 100%;
+        height: 40%; /* La lista ocupa la parte de arriba */
+        border-right: none;
+        border-bottom: 1px solid #d1d1d6;
+    }
+
+    .notes-content {
+        width: 100%;
+        height: 60%; /* La nota ocupa la parte de abajo */
+    }
+    
+    /* Hacemos los textos un pelín más grandes para que se lean bien en móvil */
+    .note-item h4 { font-size: 16px; }
+    .note-detail-title { font-size: 18px; }
+}

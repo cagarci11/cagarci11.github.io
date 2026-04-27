@@ -111,11 +111,11 @@ function openApp(nombreApp) {
         misNotas.forEach(nota => {
             // ARREGLADO: Comillas corregidas aquí abajo
             listaHTML += `
-            <div class="note-item" onclick='mostrarNotaDetail(${JSON.stringify(nota)}, this)'>
-                <h4>${nota.titulo}</h4>
-                <p>${nota.preview}</p>
-                <span>${nota.fecha}</span>
-            </div>
+                <div class="note-item" onclick="mostrarNotaPorId(${nota.id}, this)">
+                    <h4>${nota.titulo}</h4>
+                    <p>${nota.preview}</p>
+                    <span>${nota.fecha}</span>
+                </div>
             `;
         });
 
@@ -136,19 +136,33 @@ function openApp(nombreApp) {
 }
 
 // Solo para la app notas:
+function mostrarNotaPorId(id, elemento) {
+    // 1. Buscamos la nota en el array (tenemos que declarar misNotas fuera o volver a definir el array aquí)
+    // Para que sea más fácil, recuperamos los datos del array que ya definiste en openApp
+    const notas = [
+        { id: 1, titulo: "2/150??", fecha: "10 de abril de 2026", cuerpo: "Las tornas han cambiado..." },
+        { id: 2, titulo: "...", fecha: "28 de febrero de 2026", cuerpo: "Ahora me ha dado por los vinilos..." },
+        { id: 3, titulo: "Lista", fecha: "20 de abril de 2026", cuerpo: "patatas..." }
+    ];
+    
+    const nota = notas.find(n => n.id === id);
 
-function mostrarNotaDetail(nota, elemento) {
-    // Quitar clase active de todos
+    // 2. Quitamos el active de los demás
     document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
-    // Añadir al seleccionado
     elemento.classList.add('active');
 
+    // 3. Pintamos
     const display = document.getElementById('note-display');
     display.innerHTML = `
         <h2 class="note-detail-title">${nota.titulo}</h2>
         <span class="note-detail-date">${nota.fecha}</span>
         <div class="note-detail-body">${nota.cuerpo.replace(/\n/g, '<br>')}</div>
     `;
+    
+    // 4. OPCIONAL: En móvil, podemos hacer scroll automático hacia abajo para ver la nota
+    if(window.innerWidth < 600) {
+        display.scrollIntoView({ behavior: 'smooth' });
+    }
 }
 
 // ESTA FUNCIÓN ES LA QUE CIERRA TODO
