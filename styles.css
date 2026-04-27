@@ -388,7 +388,9 @@ body {
 .notes-app-container {
     display: flex;
     height: 100%;
+    width: 100%;
     background-color: #f0f0f2;
+    overflow: hidden; /* Evita scrolls dobles raros */
 }
 
 /* Columna Izquierda: Lista de Notas */
@@ -436,11 +438,12 @@ body {
 
 /* Columna Derecha: Contenido */
 .notes-content {
-    flex: 1; /* Esto hace que ocupe todo el espacio sobrante */
-    padding: 30px;
+    flex: 1;
+    padding: 20px;
     background-color: #ffffff;
-    overflow-y: auto;
-    text-align: left; /* Asegura que el poema se alinee a la izquierda */
+    overflow-y: auto; /* IMPORTANTE: permite bajar para leer el poema */
+    display: flex;
+    flex-direction: column;
 }
 
 .note-detail-title {
@@ -457,11 +460,12 @@ body {
     display: block;
 }
 
+/* Estilos de texto */
 .note-detail-body {
     font-size: 16px;
-    line-height: 1.6;
+    line-height: 1.5;
     color: #333;
-    margin-top: 10px;
+    padding-bottom: 50px; /* Espacio extra al final para poder scrollear bien */
 }
 
 /* Esto asegura que en pantallas pequeñas las columnas no se aplasten */
@@ -472,14 +476,15 @@ body {
 
     .notes-sidebar {
         width: 100%;
-        height: 40%; /* La lista ocupa la parte de arriba */
+        height: 150px; /* Altura fija para que no coma toda la pantalla */
         border-right: none;
         border-bottom: 1px solid #d1d1d6;
+        flex-shrink: 0; /* Que no se encoja */
     }
 
     .notes-content {
         width: 100%;
-        height: 60%; /* La nota ocupa la parte de abajo */
+        height: calc(100% - 150px); /* Ocupa el resto del espacio */
     }
     
     /* Hacemos los textos un pelín más grandes para que se lean bien en móvil */

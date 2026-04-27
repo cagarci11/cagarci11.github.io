@@ -140,23 +140,22 @@ function mostrarNotaPorId(id, elemento) {
     // Buscamos la nota en el array global
     const nota = misNotasContenidos.find(n => n.id === id);
 
-    // Quitamos el active de otros y ponemos al actual
+    if (!nota) return;
+
+    // Marcamos la nota activa visualmente
     document.querySelectorAll('.note-item').forEach(i => i.classList.remove('active'));
     elemento.classList.add('active');
 
+    // Pintamos el contenido
     const display = document.getElementById('note-display');
-    if (display && nota) {
-        display.innerHTML = `
-            <h2 class="note-detail-title">${nota.titulo}</h2>
-            <span class="note-detail-date">${nota.fecha}</span>
-            <div class="note-detail-body">${nota.cuerpo.replace(/\n/g, '<br>')}</div>
-        `;
-        
-        // Si es móvil, hace scroll para ver el contenido
-        if(window.innerWidth < 600) {
-            display.scrollIntoView({ behavior: 'smooth' });
-        }
-    }
+    display.innerHTML = `
+        <h2 class="note-detail-title">${nota.titulo}</h2>
+        <span class="note-detail-date">${nota.fecha}</span>
+        <div class="note-detail-body">${nota.cuerpo.replace(/\n/g, '<br>')}</div>
+    `;
+
+    // En móviles, hacemos que el scroll del contenido suba al principio al cambiar de nota
+    display.scrollTop = 0;
 }
 
 // ESTA FUNCIÓN ES LA QUE CIERRA TODO
