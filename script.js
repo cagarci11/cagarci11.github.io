@@ -186,7 +186,7 @@ function renderExportsList() {
 // Función para mostrar el reproductor (Imagen 2)
 function abrirReproductor(archivo) {
     const contenido = document.getElementById('app-content-area');
-    
+
     contenido.innerHTML = `
         <div class="player-view">
             <div class="back-arrow" onclick="renderExportsList()">✕</div>
@@ -213,9 +213,11 @@ function abrirReproductor(archivo) {
             </div>
 
             <div class="player-btns">
-                <span style="cursor:pointer">⏮</span>
-                <div class="play-circle" style="cursor:pointer" onclick="togglePlay()">⏸</div>
-                <span style="cursor:pointer">⏭</span>
+                <span style="cursor:pointer; color: #1d1d1f; font-size: 24px;">⏮</span>
+                <div class="play-circle" style="cursor:pointer; display:flex; align-items:center; justify-content:center;" onclick="togglePlay()">
+                    <span id="play-pause-icon" style="font-size: 20px;">⏸</span>
+                </div>
+                <span style="cursor:pointer; color: #1d1d1f; font-size: 24px;">⏭</span>
             </div>
         </div>
     `;
@@ -225,12 +227,12 @@ function abrirReproductor(archivo) {
     const txtTotal = document.getElementById('tiempo-total');
 
     // EVENTO: Cuando el audio carga, saca la duración total
-    audio.onloadedmetadata = function() {
+    audio.onloadedmetadata = function () {
         txtTotal.innerText = formatearTiempo(audio.duration);
     };
 
     // EVENTO: Mientras el audio suena, mueve la barra y el tiempo
-    audio.ontimeupdate = function() {
+    audio.ontimeupdate = function () {
         const porcentaje = (audio.currentTime / audio.duration) * 100;
         barra.style.width = porcentaje + "%";
         txtActual.innerText = formatearTiempo(audio.currentTime);
@@ -240,14 +242,14 @@ function abrirReproductor(archivo) {
 // Función para Play/Pause
 function togglePlay() {
     const audio = document.getElementById('audio-principal');
-    const btn = document.getElementById('play-pause-btn');
+    const icono = document.getElementById('play-pause-icon');
 
     if (audio.paused) {
         audio.play();
-        btn.innerText = "⏸"; // Cambia a icono de pausa
+        icono.innerText = "⏸"; // Si suena, muestra pausa
     } else {
         audio.pause();
-        btn.innerText = "▶"; // Cambia a icono de play
+        icono.innerText = "▶"; // Si para, muestra play
     }
 }
 
