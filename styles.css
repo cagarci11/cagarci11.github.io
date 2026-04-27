@@ -88,7 +88,7 @@ body {
 .notas { background-image: url('notas.png'); }
 .musica { background-image: url('musica.png'); }
 .galeria { background-image: url('https://cdn-icons-png.flaticon.com/512/1375/1375106.png'); background-size: 70%; }
-.amor { background-image: url('https://cdn-icons-png.flaticon.com/512/716/716784.png'); background-size: 70%; }
+.export { background-image: url('https://cdn-icons-png.flaticon.com/512/716/716784.png'); background-size: 70%; }
 .safari-icon { background-image: url('https://cdn-icons-png.flaticon.com/512/888/888846.png'); background-size: 70%; }
 .papelera { background-image: url('https://cdn-icons-png.flaticon.com/512/2891/2891491.png'); background-size: 70%; }
 
@@ -567,14 +567,18 @@ body {
 
 .player-title {
     font-weight: 600;
-    font-size: 18px;
-    margin-bottom: 4px;
+    font-size: 22px; /* Un poco más grande como en la foto */
+    color: #1d1d1f; /* Forzamos el color oscuro */
+    margin-top: 15px;
+    margin-bottom: 5px;
 }
 
 .player-subtitle {
-    color: #888;
-    font-size: 14px;
+    color: #86868b; /* Gris suave para el artista */
+    font-size: 16px;
     margin-bottom: 25px;
+    text-transform: uppercase; /* Para el estilo KARLO11 */
+    letter-spacing: 1px;
 }
 
 /* Controles de audio simulados */
@@ -591,9 +595,8 @@ body {
 }
 
 .timeline-progress {
-    width: 35%; /* Simula que va por el 35% */
     height: 100%;
-    background: #7d7dbd;
+    background: #8e8efa; /* El lila de la foto */
     border-radius: 2px;
 }
 
@@ -621,4 +624,29 @@ body {
     align-items: center;
     justify-content: center;
     color: white;
+}
+
+/* Ajustes para el reproductor en móvil */
+@media (max-width: 600px) {
+    .player-view {
+        padding: 10px; /* Menos margen para ganar espacio */
+    }
+
+    .album-cover {
+        width: 120px; /* Imagen más pequeña en móvil */
+        height: 120px;
+        margin: 10px 0;
+    }
+
+    .player-title {
+        font-size: 16px; /* Texto un pelín más pequeño */
+    }
+
+    .player-btns {
+        gap: 20px; /* Estrechar los botones para que no se corten */
+    }
+
+    .audio-timeline {
+        width: 95%; /* Que aproveche casi todo el ancho */
+    }
 }

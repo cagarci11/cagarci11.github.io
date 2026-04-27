@@ -29,6 +29,7 @@ function openApp(nombreApp) {
     titulo.innerText = nombreApp;
     ventana.style.display = 'flex';
 
+    // app galeria
     if (nombreApp === 'Galería') {
         contenido.innerHTML = `
             <div class="gallery-grid">
@@ -39,6 +40,7 @@ function openApp(nombreApp) {
             </div>
         `;
     }
+    // app navegador
     else if (nombreApp === 'Safari' || nombreApp === 'Navegador') {
         contenido.innerHTML = `
             <div class="safari-container">
@@ -55,12 +57,14 @@ function openApp(nombreApp) {
         // Reproducir solo Safari
         musicaSafari.play().catch(e => console.log("Error audio Safari"));
     }
+    // app San Jorge
     else if (nombreApp === 'San Jorge') {
         contenido.innerHTML = `
             <div class="sj-container">
 
             <h2 class="sj-title">VALE POR UNA FOTO DE FOTOMATÓN</h2>
             <p class="sj-subtext">espero q no expire nunca</p>
+            <p class="sj-subtext"> </p>
             <p class="sj-text">Supongo que el día de San Jorge es subjetivo...</p>
             <p class="sj-text">Pero tranqui que no te quedas sin tu rosa</p>
 
@@ -105,7 +109,7 @@ function openApp(nombreApp) {
     `;
     }
     // exports
-    else if (nombreApp === 'Amor' || nombreApp === 'Exports') {
+    else if (nombreApp === 'export') {
         renderExportsList();
     }
     else {
@@ -191,12 +195,12 @@ function abrirReproductor(archivo) {
         <div class="player-view">
             <div class="back-arrow" onclick="renderExportsList()">✕</div>
             
-            <div class="album-cover" style="background: none;"> 
-                <img src="1_150foto.jpeg" style="width:100%; height:100%; border-radius:15px; object-fit:cover;">
+            <div class="album-cover" style="background: none; max-width: 80vw; max-height: 80vw;"> 
+                <img src="1_150foto.jpeg" style="width:100%; height:100%; border-radius:15px; object-fit:cover; display:block;">
             </div>
 
-            <div class="player-title">${archivo.nombre.replace('.mp3', '')}</div>
-            <div class="player-subtitle">${archivo.subtitulo}</div>
+            <div class="player-title" style="color: #1d1d1f;">${archivo.nombre.replace('.mp4', '')}</div>
+            <div class="player-subtitle" style="color: #86868b;">${archivo.subtitulo}</div>
 
             <audio id="audio-principal" autoplay>
                 <source src="${archivo.url}" type="audio/mpeg">
