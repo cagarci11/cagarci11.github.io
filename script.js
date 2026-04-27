@@ -104,6 +104,10 @@ function openApp(nombreApp) {
         </div>
     `;
     }
+    // exports
+    else if (nombreApp === 'Amor' || nombreApp === 'Exports') {
+        renderExportsList();
+    }
     else {
         contenido.innerHTML = '<p style="text-align:center; padding:20px; color:#666;">Contenido en desarrollo...</p>';
     }
@@ -156,6 +160,102 @@ function mostrarNotaPorId(id, elemento) {
 
     // En móviles, hacemos que el scroll del contenido suba al principio al cambiar de nota
     display.scrollTop = 0;
+}
+
+// SOLO PARA EXPORTS
+function renderExportsList() {
+    const contenido = document.getElementById('app-content-area');
+    const misArchivos = [
+        { id: 1, nombre: "1/150 (no sé)", url: "1_150.mp4", tamano: "394 KB", subtitulo: "KARLO11" }
+    ];
+
+    let html = '<div class="exports-container">';
+    misArchivos.forEach(archivo => {
+        html += `
+            <div class="music-item" onclick='abrirReproductor(${JSON.stringify(archivo)})'>
+                <span class="icon-audio">🎵</span>
+                <span class="file-name">${archivo.nombre}</span>
+                <span class="file-size">${archivo.tamano}</span>
+            </div>
+        `;
+    });
+    html += '</div>';
+    contenido.innerHTML = html;
+}
+
+// Función para mostrar el reproductor (Imagen 2)
+function abrirReproductor(archivo) {
+    const contenido = document.getElementById('app-content-area');
+    
+    contenido.innerHTML = `
+        <div class="player-view">
+            <div class="back-arrow" onclick="renderExportsList()">✕</div>
+            
+            <div class="album-cover" style="background: none;"> 
+                <img src="1_150foto.jpeg" style="width:100%; height:100%; border-radius:15px; object-fit:cover;">
+            </div>
+
+            <div class="player-title">${archivo.nombre.replace('.mp3', '')}</div>
+            <div class="player-subtitle">${archivo.subtitulo}</div>
+
+            <audio id="audio-principal" autoplay>
+                <source src="${archivo.url}" type="audio/mpeg">
+            </audio>
+
+            <div class="audio-timeline">
+                <div class="timeline-bar">
+                    <div class="timeline-progress" id="progreso-barra"></div>
+                </div>
+                <div class="time-labels">
+                    <span id="tiempo-actual">0:00</span>
+                    <span id="tiempo-total">0:00</span>
+                </div>
+            </div>
+
+            <div class="player-btns">
+                <span style="cursor:pointer">⏮</span>
+                <div class="play-circle" style="cursor:pointer" onclick="togglePlay()">⏸</div>
+                <span style="cursor:pointer">⏭</span>
+            </div>
+        </div>
+    `;
+    const audio = document.getElementById('audio-principal');
+    const barra = document.getElementById('progreso-barra');
+    const txtActual = document.getElementById('tiempo-actual');
+    const txtTotal = document.getElementById('tiempo-total');
+
+    // EVENTO: Cuando el audio carga, saca la duración total
+    audio.onloadedmetadata = function() {
+        txtTotal.innerText = formatearTiempo(audio.duration);
+    };
+
+    // EVENTO: Mientras el audio suena, mueve la barra y el tiempo
+    audio.ontimeupdate = function() {
+        const porcentaje = (audio.currentTime / audio.duration) * 100;
+        barra.style.width = porcentaje + "%";
+        txtActual.innerText = formatearTiempo(audio.currentTime);
+    };
+}
+
+// Función para Play/Pause
+function togglePlay() {
+    const audio = document.getElementById('audio-principal');
+    const btn = document.getElementById('play-pause-btn');
+
+    if (audio.paused) {
+        audio.play();
+        btn.innerText = "⏸"; // Cambia a icono de pausa
+    } else {
+        audio.pause();
+        btn.innerText = "▶"; // Cambia a icono de play
+    }
+}
+
+// Función para convertir segundos en formato 0:00
+function formatearTiempo(segundos) {
+    const min = Math.floor(segundos / 60);
+    const seg = Math.floor(segundos % 60);
+    return min + ":" + (seg < 10 ? '0' : '') + seg;
 }
 
 // ESTA FUNCIÓN ES LA QUE CIERRA TODO
